@@ -1,0 +1,1 @@
+docker run -d -p 9090:9090 -v D:\Denemeler\PrometheusDocker\prometheus.yml:/etc/prometheus/prometheus.yml --name=prometheus prom/prometheus --config.file=/etc/prometheus/prometheus.yml

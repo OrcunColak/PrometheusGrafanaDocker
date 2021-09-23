@@ -1,0 +1,30 @@
+version: "3.7"
+
+volumes:
+    grafana_data: {}
+    
+networks:
+  back-tier:    
+    
+services:  
+    prometheus:
+        image: prom/prometheus
+        ports:
+          - "9090:9090"
+        command: "--config.file=/etc/prometheus/prometheus.yml"
+        volumes:
+          - ./prometheus/:/etc/prometheus/
+        networks:
+          - back-tier
+    grafana:
+        image: grafana/grafana
+        depends_on:
+            - prometheus
+        ports:
+          - "3000:3000"
+        volumes:
+         - grafana_data:/var/lib/grafana
+        networks:
+          - back-tier
+
+    
